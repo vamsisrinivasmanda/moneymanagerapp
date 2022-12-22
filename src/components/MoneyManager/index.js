@@ -23,7 +23,8 @@ class MoneyManager extends Component {
     amount: 0,
     balance: 0,
     expenses: 0,
-    incometype: '',
+    type: transactionTypeOptions[0].optionId,
+    incomeText: transactionTypeOptions[0].displayText,
   }
 
   titleinput = event => {
@@ -35,34 +36,30 @@ class MoneyManager extends Component {
   }
 
   incometype = event => {
-    this.setState({incometype: event.target.value})
+    this.setState({type: event.target.value})
   }
 
   formdata = event => {
-    const {title, amount, incometype, balance, expenses} = this.state
-    event.prevent.Default()
+    const {title, amount, type, balance, expenses} = this.state
+    event.preventDefault()
     const newTransaction = {
       id: uuidv4(),
       title,
       amount,
       balance,
       expenses,
-      incometype,
+      type,
     }
     this.setState(prevState => ({
       moneyDetails: [...prevState.moneyDetails, newTransaction],
+      title: '',
+      amount: '',
+      type: transactionTypeOptions[0].optionId,
     }))
   }
 
   render() {
-    const {
-      moneyDetails,
-      title,
-      amount,
-      incometype,
-      balance,
-      expenses,
-    } = this.state
+    const {moneyDetails, amount, balance, expenses} = this.state
     console.log(moneyDetails)
     return (
       <div className="bg-container">
@@ -72,47 +69,61 @@ class MoneyManager extends Component {
             Welcome back to your <span className="bold-text">Money Manger</span>
           </p>
         </div>
+
         <MoneyDetails amount={amount} balance={balance} expenses={expenses} />
 
         <div className="transcation">
           <form className="form-details" onSubmit={this.formdata}>
             <h1>Add Transaction</h1>
-            <label htmlFor="text">TITLE</label>
+            <label className="label-input" htmlFor="text">
+              TITLE
+            </label>
             <input
               type="text"
               id="text"
+              className="input"
               placeholder="TITLE"
               onChange={this.titleinput}
             />
-            <label htmlFor="amount">AMOUNT</label>
+            <label className="label-input" htmlFor="amount">
+              AMOUNT
+            </label>
             <input
               type="text"
               id="amount"
+              className="input"
               placeholder="AMOUNT"
               onChange={this.amountinput}
             />
-            <label htmlFor="drop">TYPE</label>
-            <select onChange={this.incometype}>
+            <label className="label-input" htmlFor="drop">
+              TYPE
+            </label>
+            <select className="input" onChange={this.type}>
               {transactionTypeOptions.map(eachitem => (
                 <option id={eachitem.optionId}>{eachitem.displayText}</option>
               ))}
             </select>
-            <button type="submit" className="button">
+            <button type="submit" className="form-button">
               Add
             </button>
           </form>
           <div className="history-container">
             <h1>History</h1>
             <ul>
-              <p>Title</p>
-              <p>Amount</p>
-              <p>Type</p>
-              {moneyDetails.map(eachTransaction => (
-                <TransactionItem
-                  key={eachTransaction.id}
-                  eachTransaction={eachTransaction}
-                />
-              ))}
+              <div className="transaction-container">
+                <li className="transaction-formate">
+                  <p>Title</p>
+                  <p>Amount</p>
+                  <p>Type</p>
+                </li>
+
+                {moneyDetails.map(eachTransaction => (
+                  <TransactionItem
+                    key={eachTransaction.id}
+                    eachTransaction={eachTransaction}
+                  />
+                ))}
+              </div>
             </ul>
           </div>
         </div>

@@ -1,0 +1,26 @@
+.transaction-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+  }
+  .transaction-formate {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    padding-right: 10px;
+    width: 400px;
+    border-style: solid;
+    border-width: 1px;
+  }
+  .del-button {
+    background: transparent;
+    border-width: 0px;
+  }
+  .delete {
+    height: 20px;
+    width: 20px;
+  }
+  

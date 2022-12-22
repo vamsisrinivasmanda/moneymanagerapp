@@ -1,50 +1,49 @@
 .money-details {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  .balance-card {
-    background-color: #ecfccb;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 13px;
-    padding: 10px;
-    width: 300px;
-    height: 120px;
-    border-color: #84cc16;
-    border-width: 1px;
-    border-style: solid;
-  }
-  .income-card {
-    background-color: #cffafe;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 13px;
-    padding: 10px;
-    width: 300px;
-    height: 120px;
-    border-color: #06b6d4;
-    border-width: 1px;
-    border-style: solid;
-  }
-  .expenses-card {
-    background-color: #ede9fe;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 13px;
-    padding: 10px;
-    width: 300px;
-    height: 120px;
-    border-color: #7c3aed;
-    border-width: 1px;
-    border-style: solid;
-  }
-  .logo {
-    height: 70px;
-    width: 70px;
-  }
-  
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.balance-card {
+  background-color: #ecfccb;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 13px;
+  padding: 10px;
+  width: 300px;
+  height: 120px;
+  border-color: #84cc16;
+  border-width: 1px;
+  border-style: solid;
+}
+.income-card {
+  background-color: #cffafe;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 13px;
+  padding: 10px;
+  width: 300px;
+  height: 120px;
+  border-color: #06b6d4;
+  border-width: 1px;
+  border-style: solid;
+}
+.expenses-card {
+  background-color: #ede9fe;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 13px;
+  padding: 10px;
+  width: 300px;
+  height: 120px;
+  border-color: #7c3aed;
+  border-width: 1px;
+  border-style: solid;
+}
+.logo {
+  height: 70px;
+  width: 70px;
+}
