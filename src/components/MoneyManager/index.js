@@ -20,47 +20,101 @@ class MoneyManager extends Component {
   state = {
     moneyDetails: initialmoneyDetails,
     title: '',
-    amount: 0,
-    balance: 0,
-    expenses: 0,
+    amountInput: '',
+
     type: transactionTypeOptions[0].optionId,
-    incomeText: transactionTypeOptions[0].displayText,
   }
 
   titleinput = event => {
     this.setState({title: event.target.value})
   }
 
-  amountinput = event => {
-    this.setState({amount: event.target.value})
+  changeamountinput = event => {
+    this.setState({amountInput: event.target.value})
   }
 
   incometype = event => {
     this.setState({type: event.target.value})
+
+    // console.log(event.target.value)
+  }
+
+  transactionDelete = id => {
+    const {moneyDetails} = this.state
+    const filterdata = moneyDetails.filter(eachitems => eachitems.id !== id)
+    this.setState({moneyDetails: filterdata})
   }
 
   formdata = event => {
-    const {title, amount, type, balance, expenses} = this.state
     event.preventDefault()
+    const {title, amountInput, type} = this.state
+
+    const typeOption = transactionTypeOptions.find(
+      eachoptions => eachoptions.optionId === type,
+    )
+
+    const displaytext = typeOption.displayText
+    // console.log(typeOption.displayText)
+
     const newTransaction = {
       id: uuidv4(),
       title,
-      amount,
-      balance,
-      expenses,
-      type,
+      amount: parseInt(amountInput),
+      incomeText: displaytext,
     }
     this.setState(prevState => ({
       moneyDetails: [...prevState.moneyDetails, newTransaction],
       title: '',
-      amount: '',
+      amountInput: '',
       type: transactionTypeOptions[0].optionId,
     }))
   }
 
+  getexpenses = () => {
+    const {moneyDetails} = this.state
+    let expenses = 0
+
+    moneyDetails.forEach(each => {
+      if (each.incomeText === transactionTypeOptions[1].displayText) {
+        expenses += each.amount
+      }
+    })
+    return expenses
+  }
+
+  getIncome = () => {
+    const {moneyDetails} = this.state
+    let incomeamount = 0
+    moneyDetails.forEach(each => {
+      if (each.incomeText === transactionTypeOptions[0].displayText) {
+        incomeamount += each.amount
+      }
+    })
+    return incomeamount
+  }
+
+  getBalance = () => {
+    const {moneyDetails} = this.state
+    let balanceamount = 0
+    let incomeamount = 0
+    let expenses = 0
+    moneyDetails.forEach(each => {
+      if (each.incomeText === transactionTypeOptions[0].displayText) {
+        incomeamount += each.amount
+      } else if (each.incomeText === transactionTypeOptions[1].displayText) {
+        expenses += each.amount
+      }
+    })
+    balanceamount = incomeamount - expenses
+    return balanceamount
+  }
+
   render() {
-    const {moneyDetails, amount, balance, expenses} = this.state
+    const {moneyDetails, amountInput, type} = this.state
     console.log(moneyDetails)
+    const expenses = this.getexpenses()
+    const incomeamount = this.getIncome()
+    const balanceamount = this.getBalance()
     return (
       <div className="bg-container">
         <div className="customer-details">
@@ -70,7 +124,11 @@ class MoneyManager extends Component {
           </p>
         </div>
 
-        <MoneyDetails amount={amount} balance={balance} expenses={expenses} />
+        <MoneyDetails
+          incomeamount={incomeamount}
+          expenses={expenses}
+          balanceamount={balanceamount}
+        />
 
         <div className="transcation">
           <form className="form-details" onSubmit={this.formdata}>
@@ -93,14 +151,16 @@ class MoneyManager extends Component {
               id="amount"
               className="input"
               placeholder="AMOUNT"
-              onChange={this.amountinput}
+              onChange={this.changeamountinput}
             />
             <label className="label-input" htmlFor="drop">
               TYPE
             </label>
-            <select className="input" onChange={this.type}>
+            <select className="input" onChange={this.incometype} value={type}>
               {transactionTypeOptions.map(eachitem => (
-                <option id={eachitem.optionId}>{eachitem.displayText}</option>
+                <option id={eachitem.optionId} value={eachitem.optionId}>
+                  {eachitem.displayText}
+                </option>
               ))}
             </select>
             <button type="submit" className="form-button">
@@ -121,6 +181,7 @@ class MoneyManager extends Component {
                   <TransactionItem
                     key={eachTransaction.id}
                     eachTransaction={eachTransaction}
+                    transactionDelete={this.transactionDelete}
                   />
                 ))}
               </div>

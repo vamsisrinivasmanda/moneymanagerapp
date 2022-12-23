@@ -11,7 +11,7 @@
   align-items: center;
   border-radius: 13px;
   padding: 10px;
-  width: 300px;
+  width: 250px;
   height: 120px;
   border-color: #84cc16;
   border-width: 1px;
@@ -24,7 +24,7 @@
   align-items: center;
   border-radius: 13px;
   padding: 10px;
-  width: 300px;
+  width: 250px;
   height: 120px;
   border-color: #06b6d4;
   border-width: 1px;
@@ -37,7 +37,7 @@
   align-items: center;
   border-radius: 13px;
   padding: 10px;
-  width: 300px;
+  width: 250px;
   height: 120px;
   border-color: #7c3aed;
   border-width: 1px;
@@ -46,4 +46,8 @@
 .logo {
   height: 70px;
   width: 70px;
+}
+.amount {
+  font-weight: bold;
+  font-size: 20px;
 }
