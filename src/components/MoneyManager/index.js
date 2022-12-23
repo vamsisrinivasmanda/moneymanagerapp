@@ -110,7 +110,7 @@ class MoneyManager extends Component {
   }
 
   render() {
-    const {moneyDetails, amountInput, type} = this.state
+    const {moneyDetails, title, amountInput, type} = this.state
     console.log(moneyDetails)
     const expenses = this.getexpenses()
     const incomeamount = this.getIncome()
@@ -141,6 +141,7 @@ class MoneyManager extends Component {
               id="text"
               className="input"
               placeholder="TITLE"
+              value={title}
               onChange={this.titleinput}
             />
             <label className="label-input" htmlFor="amount">
@@ -151,6 +152,7 @@ class MoneyManager extends Component {
               id="amount"
               className="input"
               placeholder="AMOUNT"
+              value={amountInput}
               onChange={this.changeamountinput}
             />
             <label className="label-input" htmlFor="drop">

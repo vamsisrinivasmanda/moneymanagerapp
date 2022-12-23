@@ -1,6 +1,7 @@
 import './index.css'
 
 const MoneyDetails = props => {
+  // remove testid while run the code
   const {incomeamount, balanceamount, expenses} = props
   return (
     <div className="money-details">
